@@ -38,6 +38,11 @@ export default {
             title:"Details",
             type:"string",
         },
+        {
+            name:"reviews",
+            title:"Reviews",
+            type:"number",
+        },
         
     ]
 }
