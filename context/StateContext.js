@@ -24,8 +24,17 @@ export const StateContext = ({children}) => {
           ...cartProduct, 
           quantity: cartProduct.quantity + quantity
         }
-      })
+        // if(cartProduct._id === product._id) {
+        //   return {
+        //     ...cartProduct,
+        //     quantity: cartProduct.quantity + quantity
+        //   } 
+        // } 
+        // else {
+        //   return {...cartProduct}
+        // }
       setCartItems(updatedCartItems);
+    });
 
     } else {
       product.quantity = quantity;
@@ -44,7 +53,7 @@ export const StateContext = ({children}) => {
   }
 
 
-  const toggleCartItemQuanitity = (id, value) => {
+  const toggleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
     index = cartItems.findIndex((product) => product._id === id);
 
@@ -94,8 +103,11 @@ export const StateContext = ({children}) => {
         decreaseQuantity,
         increaseQuantity,
         onAdd,
-        toggleCartItemQuanitity,
-        onRemove
+        toggleCartItemQuantity,
+        onRemove,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
       }}
     >
       {children}

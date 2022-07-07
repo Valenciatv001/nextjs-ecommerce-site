@@ -2,6 +2,8 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
+
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
@@ -9,11 +11,14 @@ export default async function handler(req, res) {
         submit_type: 'pay',
         mode: 'payment',
         payment_method_types: ['card'],
+        // discounts: [{
+        //     coupon: 'promo_1LIuHfGtLPMKmF1eOHUWkTI3',
+        // }],
         billing_address_collection: 'auto',
         shipping_options:[
-            {shipping_rate: "shr_1LIHpIGtLPMKmF1eBVopmTqW" }
-            // {shipping_rate: "shr_1LIHrVGtLPMKmF1eVXy6NCjB"},
-            // {shipping_rate:"shr_1LIHskGtLPMKmF1e3SGvPxwE"}
+            {shipping_rate: "shr_1LIHpIGtLPMKmF1eBVopmTqW" },
+            {shipping_rate: "shr_1LIHrVGtLPMKmF1eVXy6NCjB"},
+            {shipping_rate: "shr_1LIHskGtLPMKmF1e3SGvPxwE"}
         ],
         line_items: req.body.map((item) => {
           const img = item.image[0].asset._ref;
@@ -36,8 +41,14 @@ export default async function handler(req, res) {
           }
         }),
         success_url: `${req.headers.origin}/success`,
-        cancel_url: `${req.headers.origin}/canceled`,
+        cancel_url: `${req.headers.origin}/cancel`,
       }
+      // Create a new coupon
+    //   const coupon = await stripe.coupon.create({
+    //     percent_off: 2.5,
+    //     duration: "once"
+    // })
+
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create(params);
