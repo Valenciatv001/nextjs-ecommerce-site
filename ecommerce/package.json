@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "package.json",
-  "author": "Damola Olutoke <olutokeezekiel18@gmail.com>",
+  "author": "Agwu Ezekiel",
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
